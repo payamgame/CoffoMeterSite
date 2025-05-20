@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>کافومتر</title>
+  <style>
+    @font-face {
+      font-family: 'VazirBold';
+      src: url('https://cdn.fontcdn.ir/Font/Persian/Vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
+    }
+    body {
+      font-family: 'VazirBold', sans-serif;
+      background: linear-gradient(135deg, #fffaf0, #f3ebe0);
+      margin: 0;
+      padding: 20px;
+      color: #3e2f19;
+      direction: rtl;
+    }
+    .title {
+      text-align: center;
+      font-size: 38px;
+      margin-bottom: 10px;
+      color: #5c3317;
+    }
+    .caption {
+      text-align: center;
+      font-size: 20px;
+      background-color: #ffe8c7;
+      border-radius: 15px;
+      padding: 12px 24px;
+      margin-bottom: 20px;
+      display: inline-block;
+      color: #5a3921;
+    }
+    .slider-box {
+      background-color: #ffffff;
+      border-radius: 25px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 550px;
+      margin: auto;
+    }
+    .slider {
+      margin: 18px 0;
+    }
+    .slider label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+    .slider input[type="range"] {
+      width: 100%;
+    }
+    .value {
+      text-align: left;
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      color: #7b4b26;
+    }
+    .circle-btn {
+      border: none;
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+      background-color: #7b4b26;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      position: relative;
+      margin: 30px auto;
+      display: block;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .circle-btn[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .timeline {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 5px solid #f29f05;
+      box-sizing: border-box;
+      transform: rotate(-90deg);
+      clip-path: polygon(50% 0%, 100% 0, 100% 100%, 0 100%, 0 0);
+      animation: loading 5s linear forwards;
+      display: none;
+    }
+    @keyframes loading {
+      from { stroke-dasharray: 0 314; }
+      to { stroke-dasharray: 314 0; }
+    }
+    .result {
+      text-align: center;
+      font-size: 22px;
+      margin-top: 35px;
+      animation: fadeIn 1s ease-in-out;
+      color: #3d2e1f;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #866b52;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">کافومتر</div>
+  <div class="caption">با کافومتر، طعم دلخواهت رو از دل دونه‌های قهوه بیرون بکش!</div>
+  <div class="slider-box">
+    <div class="slider"><label>تلخی</label><input type="range" min="0" max="100" value="20" id="bitter"><div class="value" id="val-bitter">20%</div></div>
+    <div class="slider"><label>ترشی</label><input type="range" min="0" max="100" value="20" id="sour"><div class="value" id="val-sour">20%</div></div>
+    <div class="slider"><label>شادکنندگی</label><input type="range" min="0" max="100" value="30" id="happy"><div class="value" id="val-happy">30%</div></div>
+    <div class="slider"><label>غلظت</label><input type="range" min="0" max="100" value="30" id="dense"><div class="value" id="val-dense">30%</div></div>
+    <div class="slider"><label style="color:brown">رنگ</label><input type="range" min="0" max="100" value="10" id="sweet"><div class="value" id="val-sweet">10%</div></div>
+    <div class="slider"><label>فوم</label><input type="range" min="0" max="100" value="10" id="foam"><div class="value" id="val-foam">10%</div></div>
+  </div>
+  <button class="circle-btn" onclick="generateBlend(this)">
+    <div class="timeline" id="timeline"></div>
+    ترکیب طعم
+  </button>
+  <div class="result" id="result"></div>
+  <div class="footer">
+    ساخته شده توسط پیام گیم<br>
+    جواد شیبانی
+  </div>
+  <script>
+    const sliders = ['bitter', 'sour', 'happy', 'dense', 'sweet', 'foam'];
+    sliders.forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        document.getElementById('val-' + id).textContent = document.getElementById(id).value + '%';
+      });
+    });
+
+    const coffeeProfiles = [
+      { name: 'عربی برشته', bitter: 80, sour: 10, happy: 40, dense: 90, sweet: 10, foam: 20 },
+      { name: 'روبوستا تلخ', bitter: 90, sour: 5, happy: 70, dense: 85, sweet: 5, foam: 10 },
+      { name: 'کلمبیا نرم', bitter: 40, sour: 40, happy: 50, dense: 50, sweet: 20, foam: 30 },
+      { name: 'اتیوپی ترش', bitter: 20, sour: 70, happy: 60, dense: 40, sweet: 25, foam: 15 },
+      { name: 'اسپرسو ایتالیایی', bitter: 75, sour: 15, happy: 55, dense: 95, sweet: 5, foam: 10 }
+    ];
+
+    function generateBlend(btn) {
+      const userInput = {};
+      sliders.forEach(id => {
+        userInput[id] = parseInt(document.getElementById(id).value);
+      });
+
+      let nonZero = sliders.filter(id => userInput[id] > 0);
+      if (nonZero.length < 2) {
+        document.getElementById('result').textContent = 'برای پیشنهاد ترکیب، حداقل دو ویژگی باید انتخاب شود!';
+        return;
+      }
+
+      btn.disabled = true;
+      const timeline = document.getElementById('timeline');
+      timeline.style.display = 'block';
+      document.getElementById('result').textContent = 'در حال اجرای هوش طعمی...';
+
+      setTimeout(() => {
+        timeline.style.display = 'none';
+        btn.disabled = false;
+
+        let scores = coffeeProfiles.map(profile => {
+          let diff = 0;
+          sliders.forEach(key => {
+            diff += Math.abs(profile[key] - userInput[key]);
+          });
+          return { name: profile.name, score: diff };
+        });
+
+        scores.sort((a, b) => a.score - b.score);
+        let top = scores.slice(0, 3);
+        let weights = top.map(item => 1 / (item.score + 1));
+        let sumWeights = weights.reduce((a, b) => a + b, 0);
+        let rawPercents = weights.map(w => (w / sumWeights) * 100);
+        
+        // Round and normalize to exactly 100%
+        let rounded = rawPercents.map(p => Math.floor(p));
+        let diff = 100 - rounded.reduce((a, b) => a + b, 0);
+        while (diff > 0) {
+          let i = rawPercents.map((p, idx) => ({ idx, frac: p - rounded[idx] }))
+                             .sort((a, b) => b.frac - a.frac)[0].idx;
+          rounded[i]++;
+          diff--;
+        }
+
+        let blends = top.map((item, idx) => `${item.name} : ${rounded[idx]}%`);
+        document.getElementById('result').innerHTML = `با این درصدها به ترکیب دلخواهت می‌رسی:<br>${blends.join('<br>')}`;
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
