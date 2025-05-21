@@ -1,202 +1,1289 @@
-<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>کافومتر</title>
+  <title>کافومتر حرفه‌ای | طراحی ترکیب قهوه شخصی</title>
+  <link href="https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.css" rel="stylesheet">
   <style>
-    @font-face {
-      font-family: 'VazirBold';
-      src: url('https://cdn.fontcdn.ir/Font/Persian/Vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
+    :root {
+      --coffee-dark: #3A2516;
+      --coffee-medium: #5C3317;
+      --coffee-light: #7B4B26;
+      --coffee-cream: #D4A76A;
+      --coffee-foam: #E8D5B5;
+      --coffee-accent: #F29F05;
+      --coffee-text: #2E1E0F;
+      --coffee-bg: #F9F5F0;
+      --coffee-green: #8B9862;
+      --coffee-red: #A64452;
     }
-    body {
-      font-family: 'VazirBold', sans-serif;
-      background: linear-gradient(135deg, #fffaf0, #f3ebe0);
-      margin: 0;
-      padding: 20px;
-      color: #3e2f19;
-      direction: rtl;
-    }
-    .title {
-      text-align: center;
-      font-size: 38px;
-      margin-bottom: 10px;
-      color: #5c3317;
-    }
-    .caption {
-      text-align: center;
-      font-size: 20px;
-      background-color: #ffe8c7;
-      border-radius: 15px;
-      padding: 12px 24px;
-      margin-bottom: 20px;
-      display: inline-block;
-      color: #5a3921;
-    }
-    .slider-box {
-      background-color: #ffffff;
-      border-radius: 25px;
-      padding: 24px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      max-width: 550px;
-      margin: auto;
-    }
-    .slider {
-      margin: 18px 0;
-    }
-    .slider label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 16px;
-    }
-    .slider input[type="range"] {
-      width: 100%;
-    }
-    .value {
-      text-align: left;
-      font-size: 14px;
-      margin-top: -10px;
-      margin-bottom: 10px;
-      color: #7b4b26;
-    }
-    .circle-btn {
-      border: none;
-      border-radius: 50%;
-      width: 130px;
-      height: 130px;
-      background-color: #7b4b26;
-      color: white;
-      font-size: 17px;
-      cursor: pointer;
-      position: relative;
-      margin: 30px auto;
-      display: block;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    }
-    .circle-btn[disabled] {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .timeline {
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      border: 5px solid #f29f05;
+    
+    * {
       box-sizing: border-box;
-      transform: rotate(-90deg);
-      clip-path: polygon(50% 0%, 100% 0, 100% 100%, 0 100%, 0 0);
-      animation: loading 5s linear forwards;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Yekan', sans-serif;
+      background-color: var(--coffee-bg);
+      color: var(--coffee-text);
+      line-height: 1.6;
+      background-image: radial-gradient(circle at 10% 20%, rgba(210, 180, 140, 0.1) 0%, rgba(210, 180, 140, 0.05) 90%);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      text-align: center;
+      padding: 2rem 0;
+      position: relative;
+    }
+    
+    .title {
+      font-size: 2.8rem;
+      color: var(--coffee-medium);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .title::after {
+      content: "";
+      display: block;
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--coffee-accent), var(--coffee-cream));
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--coffee-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .control-panel {
+      flex: 1;
+      min-width: 300px;
+      background-color: white;
+      border-radius: 25px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(58, 37, 22, 0.15);
+      border: 1px solid rgba(210, 180, 140, 0.4);
+      background-image: 
+        linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23D4A76A" fill-opacity="0.05" d="M30,15 Q50,5 70,15 T90,30 Q95,50 90,70 T70,90 Q50,95 30,90 T10,70 Q5,50 10,30 T30,15 Z"/></svg>');
+    }
+    
+    .slider-group {
+      margin-bottom: 2rem;
+    }
+    
+    .slider-group h3 {
+      color: var(--coffee-medium);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed var(--coffee-cream);
+    }
+    
+    .slider {
+      margin: 1.5rem 0;
+      position: relative;
+    }
+    
+    .slider label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+      color: var(--coffee-medium);
+      font-weight: bold;
+    }
+    
+    .slider-info {
+      font-size: 0.9rem;
+      color: var(--coffee-light);
+      cursor: help;
+      position: relative;
+    }
+    
+    .slider-info:hover .tooltip {
+      display: block;
+    }
+    
+    .tooltip {
       display: none;
+      position:top;
+      bottom: 100%;
+      right: 0;
+      background: var(--coffee-dark);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 5px;
+      width: 200px;
+      font-size: 0.8rem;
+      z-index: 10;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
+    
+    .slider input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--coffee-cream), var(--coffee-light));
+      outline: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .slider input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--coffee-medium);
+      cursor: pointer;
+      border: 3px solid var(--coffee-foam);
+      box-shadow: 0 2px 5px rgba(58, 37, 22, 0.3);
+      transition: all 0.2s ease;
+    }
+    
+    .slider input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+      background: var(--coffee-dark);
+    }
+    
+    .value-display {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--coffee-light);
+    }
+    
+    .brew-method {
+      margin: 2rem 0;
+    }
+    
+    .method-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .method-btn {
+      background: white;
+      border: 2px solid var(--coffee-cream);
+      border-radius: 10px;
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      font-family: 'Yekan', sans-serif; /* Ensure consistent font */
+      font-size: 1rem;
+      color: var(--coffee-medium);
+    }
+    
+    .method-btn:hover {
+      border-color: var(--coffee-accent);
+    }
+    
+    .method-btn.active {
+      background: var(--coffee-medium);
+      color: white;
+      border-color: var(--coffee-medium);
+    }
+    
+    .generate-btn {
+      background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-dark));
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      margin: 2rem auto;
+      box-shadow: 0 10px 25px rgba(58, 37, 22, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Yekan', sans-serif; /* Ensure consistent font */
+    }
+    
+    .generate-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(58, 37, 22, 0.4);
+    }
+    
+    .generate-btn:active {
+      transform: translateY(1px);
+    }
+    
+    .generate-btn[disabled] {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    .loading-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      background: var(--coffee-accent);
+      animation: loading 3s linear forwards; /* Adjusted animation duration */
+      display: none; /* Hide by default */
+    }
+    
     @keyframes loading {
-      from { stroke-dasharray: 0 314; }
-      to { stroke-dasharray: 314 0; }
+      from { width: 0%; }
+      to { width: 100%; }
     }
-    .result {
+    
+    .result-panel {
+      flex: 1;
+      min-width: 300px;
+      background: white;
+      border-radius: 25px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(58, 37, 22, 0.15);
+      border: 1px solid rgba(210, 180, 140, 0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    
+    .result-panel.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--coffee-foam);
+    }
+    
+    .result-title {
+      font-size: 1.8rem;
+      color: var(--coffee-medium);
+    }
+    
+    .roast-level {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--coffee-light);
+      font-size: 1.1rem;
+    }
+    
+    .roast-indicator {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--coffee-light); /* Default */
+    }
+    
+    .roast-indicator.light {
+      background: #D4A76A;
+    }
+    
+    .roast-indicator.mediumlight { /* Adjusted class name */
+      background: #B08C5D; /* A color between light and medium */
+    }
+
+    .roast-indicator.medium {
+      background: #9C6E3D;
+    }
+    
+    .roast-indicator.mediumdark { /* Adjusted class name */
+      background: #6D4C2B; /* A color between medium and dark */
+    }
+
+    .roast-indicator.dark {
+      background: var(--coffee-dark);
+    }
+    
+    .blend-composition {
+      margin: 1.5rem 0;
+    }
+    
+    .blend-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px dashed var(--coffee-foam);
+    }
+    
+    .blend-name {
+      font-weight: bold;
+      color: var(--coffee-medium);
+    }
+    
+    .blend-percent {
+      background: var(--coffee-foam);
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-weight: bold;
+      color: var(--coffee-dark);
+    }
+    
+    .flavor-profile {
+      margin: 2rem 0;
+    }
+    
+    .flavor-chart {
+      width: 100%;
+      height: 250px; /* Increased height for better visualization */
+      margin: 1rem auto;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .flavor-axis {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      border: 1px solid var(--coffee-cream);
+      opacity: 0.6;
+    }
+    
+    .flavor-axis:nth-child(2) {
+      width: 60%;
+      height: 60%;
+    }
+    
+    .flavor-axis:nth-child(3) {
+      width: 40%;
+      height: 40%;
+    }
+    
+    .flavor-axis:nth-child(4) {
+      width: 20%;
+      height: 20%;
+    }
+    
+    .flavor-label {
+      position: absolute;
+      font-size: 0.9rem;
+      color: var(--coffee-medium);
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+    }
+    
+    .flavor-label:nth-of-type(1) { top: 10px; left: 50%; transform: translateX(-50%); } /* تلخی */
+    .flavor-label:nth-of-type(2) { top: 50%; right: 10px; transform: translateY(-50%); } /* اسیدیتی */
+    .flavor-label:nth-of-type(3) { bottom: 10px; left: 50%; transform: translateX(-50%); } /* شیرینی */
+    .flavor-label:nth-of-type(4) { top: 50%; left: 10px; transform: translateY(-50%); } /* بادی */
+
+    .flavor-polygon {
+      position: absolute;
+      top: 0; /* SVG itself spans the whole chart area */
+      left: 0;
+      width: 100%;
+      height: 100%;
+      fill: rgba(210, 180, 140, 0.4); /* More visible fill */
+      stroke: var(--coffee-medium);
+      stroke-width: 2.5; /* Thicker stroke */
+      transition: all 0.5s ease-out; /* Smooth transition for polygon change */
+    }
+    
+    .brewing-instructions {
+      background: var(--coffee-foam);
+      padding: 1.5rem;
+      border-radius: 15px;
+      margin: 2rem 0;
+      border: 1px solid var(--coffee-cream);
+    }
+    
+    .instructions-title {
+      font-size: 1.3rem;
+      color: var(--coffee-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: bold;
+    }
+    
+    .instructions-title::before {
+      content: "🫖";
+      font-size: 1.5rem;
+    }
+    
+    .instructions-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .instructions-list li {
+      margin-bottom: 0.8rem;
+      padding-right: 1.8rem;
+      position: relative;
+      color: var(--coffee-text);
+      font-size: 1.05rem;
+    }
+    
+    .instructions-list li::before {
+      content: "•";
+      position: absolute;
+      right: 0;
+      color: var(--coffee-medium);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    
+    .save-btn {
+      background: var(--coffee-green);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(139, 152, 98, 0.3);
+      font-family: 'Yekan', sans-serif;
+    }
+    
+    .save-btn:hover {
+      background: #7A8754;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(139, 152, 98, 0.4);
+    }
+    
+    .coffee-bean {
+      position: absolute;
+      opacity: 0.08; /* Slightly less opaque */
+      z-index: -1;
+      font-size: 4rem; /* Larger for better visibility */
+      pointer-events: none; /* Prevent interaction */
+    }
+    
+    .bean-1 {
+      top: 5%;
+      left: 3%;
+      transform: rotate(25deg);
+    }
+    
+    .bean-2 {
+      bottom: 10%;
+      right: 5%;
+      transform: rotate(-20deg);
+    }
+
+    /* Popup styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(58, 37, 22, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(4px); /* Increased blur */
+      transition: opacity 0.3s ease;
+      opacity: 0; /* Hidden by default */
+      pointer-events: none; /* Disable interaction when hidden */
+    }
+    
+    .popup-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .popup-content {
+      background-color: white;
+      padding: 2.5rem;
+      border-radius: 25px;
+      max-width: 500px;
+      width: 90%;
       text-align: center;
-      font-size: 22px;
-      margin-top: 35px;
-      animation: fadeIn 1s ease-in-out;
-      color: #3d2e1f;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      border: 1px solid var(--coffee-cream);
+      position: relative;
+      overflow: hidden;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
-    .footer {
-      text-align: center;
-      margin-top: 60px;
-      color: #866b52;
-      font-size: 15px;
+    
+    .popup-content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--coffee-accent), var(--coffee-cream));
+    }
+    
+    .popup-title {
+      font-size: 1.8rem;
+      color: var(--coffee-medium);
+      margin-bottom: 1.5rem;
+      position: relative;
+      font-weight: bold;
+    }
+    
+    .popup-title::after {
+      content: "☕";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      opacity: 0.3;
+    }
+    
+    .popup-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: var(--coffee-text);
+    }
+    
+    .popup-btn {
+      background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-dark));
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(58, 37, 22, 0.2);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Yekan', sans-serif;
+    }
+    
+    .popup-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(58, 37, 22, 0.3);
+    }
+    
+    .popup-btn:active {
+      transform: translateY(1px);
+    }
+    
+    .popup-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .popup-btn:hover::before {
+      left: 100%;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2.2rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .main-content {
+        flex-direction: column; /* Stack panels on small screens */
+        gap: 1.5rem;
+      }
+
+      .control-panel, .result-panel {
+        padding: 1.5rem;
+        min-width: unset; /* Remove min-width on small screens */
+      }
+      
+      .result-title {
+        font-size: 1.5rem;
+      }
+      
+      .popup-content {
+        padding: 1.8rem;
+      }
+      
+      .popup-title {
+        font-size: 1.5rem;
+      }
+      
+      .popup-text {
+        font-size: 1rem;
+      }
+
+      .method-options {
+        flex-direction: column; /* Stack method buttons */
+      }
+      .method-btn {
+        min-width: unset;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="title">کافومتر</div>
-  <div class="caption">با کافومتر، طعم دلخواهت رو از دل دونه‌های قهوه بیرون بکش!</div>
-  <div class="slider-box">
-    <div class="slider"><label>تلخی</label><input type="range" min="0" max="100" value="20" id="bitter"><div class="value" id="val-bitter">20%</div></div>
-    <div class="slider"><label>ترشی</label><input type="range" min="0" max="100" value="20" id="sour"><div class="value" id="val-sour">20%</div></div>
-    <div class="slider"><label>شادکنندگی</label><input type="range" min="0" max="100" value="30" id="happy"><div class="value" id="val-happy">30%</div></div>
-    <div class="slider"><label>غلظت</label><input type="range" min="0" max="100" value="30" id="dense"><div class="value" id="val-dense">30%</div></div>
-    <div class="slider"><label style="color:brown">رنگ</label><input type="range" min="0" max="100" value="10" id="sweet"><div class="value" id="val-sweet">10%</div></div>
-    <div class="slider"><label>فوم</label><input type="range" min="0" max="100" value="10" id="foam"><div class="value" id="val-foam">10%</div></div>
+  <div class="coffee-bean bean-1">🌰</div>
+  <div class="coffee-bean bean-2">🌰</div>
+
+  <div id="welcome-popup" class="popup-overlay">
+    <div class="popup-content">
+      <div class="popup-title">سلام! خوش اومدی به کافومتر حرفه‌ای</div>
+      <div class="popup-text">
+        اینجا می‌تونید با استفاده از دانش علمی درباره قهوه، ترکیب ایده‌آل خودتون رو طراحی کنید!<br><br>
+        سیستم ما بر اساس داده‌های واقعی از مشخصات دانه‌های قهوه و اصول عصاره‌گیری، بهترین ترکیب رو به شما پیشنهاد می‌ده.<br>
+        ساخته شده با عشق توسط تیم پیام گیم و متخصصان قهوه.
+      </div>
+      <button class="popup-btn" onclick="document.getElementById('welcome-popup').classList.remove('show')">شروع کنیم!</button>
+    </div>
   </div>
-  <button class="circle-btn" onclick="generateBlend(this)">
-    <div class="timeline" id="timeline"></div>
-    ترکیب طعم
-  </button>
-  <div class="result" id="result"></div>
-  <div class="footer">
-    ساخته شده توسط پیام گیم<br>
-    جواد شیبانی
+
+  <div class="container">
+    <header>
+      <h1 class="title">کافومتر حرفه‌ای</h1>
+      <p class="subtitle">طراحی ترکیب قهوه شخصی بر اساس علم عصاره‌گیری و مشخصات دانه‌ها</p>
+    </header>
+    
+    <div class="main-content">
+      <div class="control-panel">
+        <div class="slider-group">
+          <h3>پروفایل طعمی</h3>
+          
+          <div class="slider">
+            <label>
+              <span>تلخی</span>
+              <span class="slider-info">ⓘ
+                <span class="tooltip">مربوط به کافئین و ترکیبات کاراملی شده در برشتگی تیره</span>
+              </span>
+            </label>
+            <input type="range" min="0" max="100" value="50" id="bitterness">
+            <div class="value-display">
+              <span>ملایم</span>
+              <span id="bitterness-value">50%</span>
+              <span>شدید</span>
+            </div>
+          </div>
+          
+          <div class="slider">
+            <label>
+              <span>اسیدیتی (ترشی)</span>
+              <span class="slider-info">ⓘ
+                <span class="tooltip">اسیدیتی طبیعی قهوه، معمولاً در دانه‌های آفریقایی بیشتر است</span>
+              </span>
+            </label>
+            <input type="range" min="0" max="100" value="50" id="acidity">
+            <div class="value-display">
+              <span>ملایم</span>
+              <span id="acidity-value">50%</span>
+              <span>زنده</span>
+            </div>
+          </div>
+          
+          <div class="slider">
+            <label>
+              <span>شیرینی طبیعی</span>
+              <span class="slider-info">ⓘ
+                <span class="tooltip">قندهای طبیعی موجود در دانه قهوه</span>
+              </span>
+            </label>
+            <input type="range" min="0" max="100" value="50" id="sweetness">
+            <div class="value-display">
+              <span>جزئی</span>
+              <span id="sweetness-value">50%</span>
+              <span>قوی</span>
+            </div>
+          </div>
+          
+          <div class="slider">
+            <label>
+              <span>بادی (غلظت)</span>
+              <span class="slider-info">ⓘ
+                <span class="tooltip">احساس دهانی و وزن قهوه در دهان</span>
+              </span>
+            </label>
+            <input type="range" min="0" max="100" value="50" id="body">
+            <div class="value-display">
+              <span>سبک</span>
+              <span id="body-value">50%</span>
+              <span>غلیظ</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="slider-group">
+          <h3>ویژگی‌های اضافی</h3>
+          
+          <div class="slider">
+            <label>
+              <span>عطر و طعم</span>
+              <span class="slider-info">ⓘ
+                <span class="tooltip">ترکیبات آروماتیک و پیچیدگی طعمی</span>
+              </span>
+            </label>
+            <input type="range" min="0" max="100" value="50" id="aroma">
+            <div class="value-display">
+              <span>ساده</span>
+              <span id="aroma-value">50%</span>
+              <span>پیچیده</span>
+            </div>
+          </div>
+          
+          <div class="slider">
+            <label>
+              <span>طعم‌های میوه‌ای</span>
+              <span class="slider-info">ⓘ
+                <span class="tooltip">خصوصیات میوه‌ای و گلی در قهوه</span>
+              </span>
+            </label>
+            <input type="range" min="0" max="100" value="50" id="fruitiness">
+            <div class="value-display">
+              <span>جزئی</span>
+              <span id="fruitiness-value">50%</span>
+              <span>قوی</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="brew-method">
+          <h3>روش دم‌آوری</h3>
+          <div class="method-options">
+            <button class="method-btn active" data-method="espresso">اسپرسو</button>
+            <button class="method-btn" data-method="pourOver">V60</button>
+            <button class="method-btn" data-method="frenchPress">فرنچ پرس</button>
+            <button class="method-btn" data-method="aeropress">ایروپرس</button>
+          </div>
+        </div>
+        
+        <button id="generate-btn" class="generate-btn">
+          <span>تولید ترکیب پیشنهادی</span>
+          <div class="loading-bar"></div>
+        </button>
+      </div>
+      
+      <div class="result-panel" id="result-panel">
+        <div class="result-header">
+          <h2 class="result-title">پیشنهاد ویژه شما</h2>
+          <div class="roast-level">
+            <span>سطح برشتگی:</span>
+            <div class="roast-indicator medium"></div>
+          </div>
+        </div>
+        
+        <div class="blend-composition">
+          <h3>ترکیب پیشنهادی:</h3>
+          <div id="blend-items">
+            </div>
+        </div>
+        
+        <div class="flavor-profile">
+          <h3>پروفایل طعمی:</h3>
+          <div class="flavor-chart">
+            <div class="flavor-axis"></div>
+            <div class="flavor-axis"></div>
+            <div class="flavor-axis"></div>
+            <div class="flavor-axis"></div>
+            <div class="flavor-label" style="top: 10px; left: 50%; transform: translateX(-50%);">تلخی</div>
+            <div class="flavor-label" style="top: 50%; right: 10px; transform: translateY(-50%);">اسیدیتی</div>
+            <div class="flavor-label" style="bottom: 10px; left: 50%; transform: translateX(-50%);">شیرینی</div>
+            <div class="flavor-label" style="top: 50%; left: 10px; transform: translateY(-50%);">بادی</div>
+            <svg class="flavor-polygon" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <polygon points="50,10 80,50 50,90 20,50" />
+            </svg>
+          </div>
+        </div>
+        
+        <div class="brewing-instructions">
+          <h3 class="instructions-title">دستورالعمل دم‌آوری</h3>
+          <ul class="instructions-list" id="instructions-list">
+            </ul>
+        </div>
+        
+        <button class="save-btn">   کلیه ی حقوق متعلق به پیام گیم است.</button>
+      </div>
+    </div>
   </div>
+
   <script>
-    const sliders = ['bitter', 'sour', 'happy', 'dense', 'sweet', 'foam'];
-    sliders.forEach(id => {
-      document.getElementById(id).addEventListener('input', () => {
-        document.getElementById('val-' + id).textContent = document.getElementById(id).value + '%';
+    document.addEventListener('DOMContentLoaded', () => {
+    // Show welcome popup on page load
+    document.getElementById('welcome-popup').classList.add('show');
+
+    // Coffee database with scientific data
+    const coffeeDB = [
+      {
+        id: 1,
+        name: "اتیوپی ییرگاچف",
+        origin: "Ethiopia",
+        region: "Yirgacheffe",
+        process: "Washed",
+        altitude: 1900,
+        bitterness: 30,
+        acidity: 80,
+        sweetness: 70,
+        body: 40,
+        aroma: 90,
+        fruitiness: 85,
+        roastLevel: "Light",
+        tastingNotes: ["بری قرمز", "هل", "شکلات سفید"],
+        suitableMethods: ["pourOver", "aeropress"],
+        brewingParams: {
+          espresso: { temp: 92, time: 28, ratio: "1:2.5", grind: "خیلی ریز" },
+          pourOver: { temp: 90, time: 180, ratio: "1:16", grind: "متوسط ریز" },
+          frenchPress: { temp: 94, time: 240, ratio: "1:15", grind: "درشت" },
+          aeropress: { temp: 85, time: 90, ratio: "1:10", grind: "متوسط تا متوسط ریز" }
+        }
+      },
+      {
+        id: 2,
+        name: "کلمبیا هوئیلا",
+        origin: "Colombia",
+        region: "Huila",
+        process: "Honey",
+        altitude: 1600,
+        bitterness: 50,
+        acidity: 60,
+        sweetness: 75,
+        body: 70,
+        aroma: 80,
+        fruitiness: 60,
+        roastLevel: "Medium",
+        tastingNotes: ["کارامل", "گردو", "شکلات شیری"],
+        suitableMethods: ["espresso", "pourOver", "frenchPress", "aeropress"],
+        brewingParams: {
+          espresso: { temp: 93, time: 30, ratio: "1:2", grind: "خیلی ریز" },
+          pourOver: { temp: 92, time: 210, ratio: "1:15", grind: "متوسط ریز" },
+          frenchPress: { temp: 95, time: 270, ratio: "1:14", grind: "درشت" },
+          aeropress: { temp: 88, time: 120, ratio: "1:12", grind: "متوسط تا متوسط ریز" }
+        }
+      },
+      {
+        id: 3,
+        name: "برزیل سانتوس",
+        origin: "Brazil",
+        region: "Santos",
+        process: "Natural",
+        altitude: 1100,
+        bitterness: 70,
+        acidity: 30,
+        sweetness: 60,
+        body: 85,
+        aroma: 60,
+        fruitiness: 40,
+        roastLevel: "Medium-Dark",
+        tastingNotes: ["شکلات تلخ", "بادام", "کارامل"],
+        suitableMethods: ["espresso", "frenchPress"],
+        brewingParams: {
+          espresso: { temp: 94, time: 25, ratio: "1:1.5", grind: "خیلی ریز" },
+          pourOver: { temp: 93, time: 180, ratio: "1:14", grind: "متوسط ریز" },
+          frenchPress: { temp: 96, time: 240, ratio: "1:13", grind: "درشت" },
+          aeropress: { temp: 90, time: 100, ratio: "1:8", grind: "متوسط تا متوسط ریز" }
+        }
+      },
+      {
+        id: 4,
+        name: "کنیا AA",
+        origin: "Kenya",
+        region: "Nyeri",
+        process: "Washed",
+        altitude: 1700,
+        bitterness: 60,
+        acidity: 85,
+        sweetness: 65,
+        body: 60,
+        aroma: 85,
+        fruitiness: 90,
+        roastLevel: "Medium-Light",
+        tastingNotes: ["تمشک", "گوجه فرنگی خشک", "شکر قهوه‌ای"],
+        suitableMethods: ["pourOver", "aeropress"],
+        brewingParams: {
+          espresso: { temp: 91, time: 27, ratio: "1:2", grind: "خیلی ریز" },
+          pourOver: { temp: 89, time: 195, ratio: "1:16", grind: "متوسط ریز" },
+          frenchPress: { temp: 93, time: 255, ratio: "1:15", grind: "درشت" },
+          aeropress: { temp: 87, time: 110, ratio: "1:11", grind: "متوسط تا متوسط ریز" }
+        }
+      },
+      {
+        id: 5,
+        name: "گواتمالا آنتیگوا",
+        origin: "Guatemala",
+        region: "Antigua",
+        process: "Washed",
+        altitude: 1500,
+        bitterness: 55,
+        acidity: 65,
+        sweetness: 70,
+        body: 75,
+        aroma: 75,
+        fruitiness: 55,
+        roastLevel: "Medium",
+        tastingNotes: ["سیب پخته", "شکر قهوه‌ای", "ادویه"],
+        suitableMethods: ["espresso", "pourOver", "frenchPress", "aeropress"],
+        brewingParams: {
+          espresso: { temp: 93, time: 28, ratio: "1:2", grind: "خیلی ریز" },
+          pourOver: { temp: 91, time: 200, ratio: "1:15", grind: "متوسط ریز" },
+          frenchPress: { temp: 94, time: 260, ratio: "1:14", grind: "درشت" },
+          aeropress: { temp: 89, time: 95, ratio: "1:9", grind: "متوسط تا متوسط ریز" }
+        }
+      }
+    ];
+
+    // DOM elements
+    const sliders = {
+      bitterness: document.getElementById('bitterness'),
+      acidity: document.getElementById('acidity'),
+      sweetness: document.getElementById('sweetness'),
+      body: document.getElementById('body'),
+      aroma: document.getElementById('aroma'),
+      fruitiness: document.getElementById('fruitiness')
+    };
+
+    const sliderValues = {
+      bitterness: document.getElementById('bitterness-value'),
+      acidity: document.getElementById('acidity-value'),
+      sweetness: document.getElementById('sweetness-value'),
+      body: document.getElementById('body-value'),
+      aroma: document.getElementById('aroma-value'),
+      fruitiness: document.getElementById('fruitiness-value')
+    };
+
+    const methodButtons = document.querySelectorAll('.method-btn');
+    const generateBtn = document.getElementById('generate-btn');
+    const resultPanel = document.getElementById('result-panel');
+    const blendItemsContainer = document.getElementById('blend-items');
+    const instructionsList = document.getElementById('instructions-list');
+    const flavorPolygon = document.querySelector('.flavor-polygon polygon');
+    const roastIndicator = document.querySelector('.roast-indicator');
+    const roastLevelText = roastIndicator.previousElementSibling; // Span with "سطح برشتگی:"
+
+    // Selected brewing method
+    let selectedMethod = 'espresso'; // Default method
+
+    // Initialize slider values and add event listeners
+    for (const [key, slider] of Object.entries(sliders)) {
+      sliderValues[key].textContent = `${slider.value}%`;
+      
+      slider.addEventListener('input', () => {
+        sliderValues[key].textContent = `${slider.value}%`;
+      });
+    }
+
+    // Method selection
+    methodButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        methodButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedMethod = btn.dataset.method;
       });
     });
 
-    const coffeeProfiles = [
-      { name: 'عربی برشته', bitter: 80, sour: 10, happy: 40, dense: 90, sweet: 10, foam: 20 },
-      { name: 'روبوستا تلخ', bitter: 90, sour: 5, happy: 70, dense: 85, sweet: 5, foam: 10 },
-      { name: 'کلمبیا نرم', bitter: 40, sour: 40, happy: 50, dense: 50, sweet: 20, foam: 30 },
-      { name: 'اتیوپی ترش', bitter: 20, sour: 70, happy: 60, dense: 40, sweet: 25, foam: 15 },
-      { name: 'اسپرسو ایتالیایی', bitter: 75, sour: 15, happy: 55, dense: 95, sweet: 5, foam: 10 }
-    ];
+    // Generate blend function
+    generateBtn.addEventListener('click', generateBlend);
 
-    function generateBlend(btn) {
-      const userInput = {};
-      sliders.forEach(id => {
-        userInput[id] = parseInt(document.getElementById(id).value);
-      });
+    function generateBlend() {
+      const userPrefs = {
+        bitterness: parseInt(sliders.bitterness.value) || 50,
+        acidity: parseInt(sliders.acidity.value) || 50,
+        sweetness: parseInt(sliders.sweetness.value) || 50,
+        body: parseInt(sliders.body.value) || 50,
+        aroma: parseInt(sliders.aroma.value) || 50,
+        fruitiness: parseInt(sliders.fruitiness.value) || 50,
+        method: selectedMethod || 'espresso'
+      };
 
-      let nonZero = sliders.filter(id => userInput[id] > 0);
-      if (nonZero.length < 2) {
-        document.getElementById('result').textContent = 'برای پیشنهاد ترکیب، حداقل دو ویژگی باید انتخاب شود!';
-        return;
+      // Show loading state
+      generateBtn.disabled = true;
+      const loadingBar = generateBtn.querySelector('.loading-bar');
+      loadingBar.style.display = 'block';
+      loadingBar.style.width = '0%';
+      
+      // Force reflow to restart animation
+      void loadingBar.offsetWidth; // Trigger reflow
+      loadingBar.style.animation = 'none'; // Reset animation
+      void loadingBar.offsetWidth; // Trigger reflow again
+      loadingBar.style.animation = 'loading 3s linear forwards'; // Reapply animation
+
+      // Simulate processing delay
+      setTimeout(() => {
+        try {
+          const blend = calculateOptimalBlend(userPrefs);
+          displayResults(blend, userPrefs.method);
+        } catch (error) {
+          console.error("Error generating blend:", error);
+          alert("خطایی در تولید ترکیب پیش آمده. لطفاً دوباره امتحان کنید.");
+        } finally {
+          // Hide loading state
+          generateBtn.disabled = false;
+          loadingBar.style.display = 'none';
+        }
+      }, 3000);
+    }
+
+    function calculateOptimalBlend(userPrefs) {
+      // 1. Filter by suitable brewing method
+      let suitableCoffees = coffeeDB.filter(
+        coffee => (coffee.suitableMethods && coffee.suitableMethods.includes(userPrefs.method))
+      );
+      
+      // If no suitable coffees based on current selection, use all coffees as a fallback
+      if (suitableCoffees.length === 0) {
+        suitableCoffees = [...coffeeDB];
       }
 
-      btn.disabled = true;
-      const timeline = document.getElementById('timeline');
-      timeline.style.display = 'block';
-      document.getElementById('result').textContent = 'در حال اجرای هوش طعمی...';
-
-      setTimeout(() => {
-        timeline.style.display = 'none';
-        btn.disabled = false;
-
-        let scores = coffeeProfiles.map(profile => {
-          let diff = 0;
-          sliders.forEach(key => {
-            diff += Math.abs(profile[key] - userInput[key]);
-          });
-          return { name: profile.name, score: diff };
-        });
-
-        scores.sort((a, b) => a.score - b.score);
-        let top = scores.slice(0, 3);
-        let weights = top.map(item => 1 / (item.score + 1));
-        let sumWeights = weights.reduce((a, b) => a + b, 0);
-        let rawPercents = weights.map(w => (w / sumWeights) * 100);
+      // 2. Calculate match score for each coffee
+      let scoredCoffees = suitableCoffees.map(coffee => {
+        let score = 100; // Start with base score
         
-        // Round and normalize to exactly 100%
-        let rounded = rawPercents.map(p => Math.floor(p));
-        let diff = 100 - rounded.reduce((a, b) => a + b, 0);
-        while (diff > 0) {
-          let i = rawPercents.map((p, idx) => ({ idx, frac: p - rounded[idx] }))
-                             .sort((a, b) => b.frac - a.frac)[0].idx;
-          rounded[i]++;
-          diff--;
-        }
+        // Subtract differences (weighted)
+        score -= Math.abs(coffee.bitterness - userPrefs.bitterness) * 1.2;
+        score -= Math.abs(coffee.acidity - userPrefs.acidity) * 1.0;
+        score -= Math.abs(coffee.sweetness - userPrefs.sweetness) * 0.8;
+        score -= Math.abs(coffee.body - userPrefs.body) * 0.9;
+        score -= Math.abs(coffee.aroma - userPrefs.aroma) * 0.7;
+        score -= Math.abs(coffee.fruitiness - userPrefs.fruitiness) * 0.6;
+        
+        // Ensure score doesn't go below 0
+        score = Math.max(0, score);
+        
+        return { ...coffee, score };
+      });
+      
+      // 3. Sort by score and select top 3 (or fewer if less than 3 available)
+      let topCoffees = scoredCoffees.sort((a, b) => b.score - a.score).slice(0, 3);
+      
+      // If no coffees (e.g., all scores are 0, or initial filter yielded nothing and DB is empty), fallback to first 3 from DB if available
+      if (topCoffees.length === 0 && coffeeDB.length > 0) {
+          topCoffees = coffeeDB.slice(0, 3).map(c => ({...c, score: 100})); // Assign default score
+      } else if (topCoffees.length === 0) { // If DB is also empty (shouldn't happen with provided data)
+          return {
+              coffees: [],
+              roastLevel: "Medium",
+              flavorProfile: { bitterness: 50, acidity: 50, sweetness: 50, body: 50, aroma: 50, fruitiness: 50 }
+          };
+      }
 
-        let blends = top.map((item, idx) => `${item.name} : ${rounded[idx]}%`);
-        document.getElementById('result').innerHTML = `با این درصدها به ترکیب دلخواهت می‌رسی:<br>${blends.join('<br>')}`;
-      }, 5000);
+
+      // 4. Calculate total score for weighting
+      let totalScore = topCoffees.reduce((sum, coffee) => sum + coffee.score, 0);
+      
+      // Prevent division by zero if all scores are 0
+      if (totalScore === 0) {
+          totalScore = topCoffees.length * 10; // Assign a minimum total score to avoid NaN
+          topCoffees.forEach(c => c.score = 10); // Ensure each has a score if all were zero
+      }
+
+
+      // 5. Calculate percentages and distribute remaining for accurate sum
+      let remaining = 100;
+      let blend = topCoffees.map(coffee => ({
+        ...coffee,
+        percentage: 0 // Initialize percentage
+      }));
+
+      // Calculate initial percentages (floor value)
+      for (let i = 0; i < blend.length; i++) {
+        const exactPercent = (blend[i].score / totalScore) * 100;
+        blend[i].percentage = Math.floor(exactPercent);
+        remaining -= blend[i].percentage;
+      }
+
+      // Distribute remaining percentage to make sum exactly 100
+      let sortedByFraction = blend.map((c, idx) => ({
+        idx: idx,
+        fraction: ((c.score / totalScore) * 100) - c.percentage
+      })).sort((a, b) => b.fraction - a.fraction);
+
+      for (let i = 0; i < remaining; i++) {
+        if (sortedByFraction[i]) { // Ensure index exists
+          blend[sortedByFraction[i].idx].percentage++;
+        }
+      }
+
+      // 6. Calculate average roast level
+      const roastLevels = {
+        "Light": 1,
+        "Medium-Light": 2,
+        "Medium": 3,
+        "Medium-Dark": 4,
+        "Dark": 5
+      };
+      
+      let totalRoastValue = 0;
+      let totalPercentage = 0;
+      blend.forEach(item => {
+        totalRoastValue += (roastLevels[item.roastLevel] || 3) * item.percentage;
+        totalPercentage += item.percentage;
+      });
+      
+      const avgRoast = (totalPercentage > 0) ? Math.round(totalRoastValue / totalPercentage) : 3; // Default to Medium if no blend items
+      const roastName = Object.keys(roastLevels).find(
+        key => roastLevels[key] === avgRoast
+      ) || "Medium"; // Default to Medium if not found
+
+      return {
+        coffees: blend,
+        roastLevel: roastName,
+        flavorProfile: calculateFlavorProfile(blend)
+      };
     }
+
+    function calculateFlavorProfile(blend) {
+      const profile = {
+        bitterness: 0,
+        acidity: 0,
+        sweetness: 0,
+        body: 0,
+        aroma: 0,
+        fruitiness: 0
+      };
+
+      let totalPercentage = 0;
+      blend.forEach(coffee => {
+        totalPercentage += coffee.percentage;
+        profile.bitterness += (coffee.bitterness * coffee.percentage);
+        profile.acidity += (coffee.acidity * coffee.percentage);
+        profile.sweetness += (coffee.sweetness * coffee.percentage);
+        profile.body += (coffee.body * coffee.percentage);
+        profile.aroma += (coffee.aroma * coffee.percentage);
+        profile.fruitiness += (coffee.fruitiness * coffee.percentage);
+      });
+
+      // Divide by totalPercentage to get weighted average
+      if (totalPercentage > 0) {
+        for (const key in profile) {
+          profile[key] = Math.round(profile[key] / totalPercentage);
+        }
+      } else { // Fallback if no coffees in blend
+        for (const key in profile) {
+          profile[key] = 50; // Default to 50%
+        }
+      }
+      return profile;
+    }
+
+    function displayResults(blend, method) {
+      // Clear previous results
+      blendItemsContainer.innerHTML = '';
+      instructionsList.innerHTML = '';
+
+      // Display blend composition
+      if (blend.coffees.length === 0) {
+        blendItemsContainer.innerHTML = '<p>هیچ ترکیب پیشنهادی یافت نشد. لطفاً تنظیمات را تغییر دهید.</p>';
+      } else {
+        blend.coffees.forEach(coffee => {
+          const blendItem = document.createElement('div');
+          blendItem.classList.add('blend-item');
+          blendItem.innerHTML = `
+            <span class="blend-name">${coffee.name}</span>
+            <span class="blend-percent">${coffee.percentage}%</span>
+          `;
+          blendItemsContainer.appendChild(blendItem);
+        });
+      }
+
+      // Update roast level indicator
+      roastIndicator.className = 'roast-indicator ' + blend.roastLevel.toLowerCase().replace('-', '');
+      roastLevelText.textContent = `سطح برشتگی: ${blend.roastLevel}`; // Update text for clarity
+
+      // Update flavor chart (polygon)
+      const svgWidth = 100; // ViewBox width
+      const svgHeight = 100; // ViewBox height
+      const centerX = svgWidth / 2;
+      const centerY = svgHeight / 2;
+      const maxRadius = 40; // Max radius within the 100x100 SVG viewbox (50 - edge padding)
+
+      // Normalize flavor profile values to 0-maxRadius and map to SVG coordinates
+      // 0% -> center (radius 0), 100% -> maxRadius
+      // Bitterness: top (Y decreases)
+      // Acidity: right (X increases)
+      // Sweetness: bottom (Y increases)
+      // Body: left (X decreases)
+      
+      const b_y = centerY - (blend.flavorProfile.bitterness / 100) * maxRadius;
+      const a_x = centerX + (blend.flavorProfile.acidity / 100) * maxRadius;
+      const s_y = centerY + (blend.flavorProfile.sweetness / 100) * maxRadius;
+      const bo_x = centerX - (blend.flavorProfile.body / 100) * maxRadius;
+      
+      const points = `${centerX},${b_y} ${a_x},${centerY} ${centerX},${s_y} ${bo_x},${centerY}`;
+      flavorPolygon.setAttribute('points', points);
+
+
+      // Display brewing instructions
+      // Find the coffee with the highest percentage in the blend to get primary instructions
+      const primaryCoffee = blend.coffees.reduce((prev, current) => 
+        (prev.percentage > current.percentage) ? prev : current, { percentage: -1 });
+
+      if (primaryCoffee && primaryCoffee.brewingParams && primaryCoffee.brewingParams[method]) {
+        const params = primaryCoffee.brewingParams[method];
+        const instructions = [
+          `دمای آب: ${params.temp}°C`,
+          `زمان دم‌آوری: ${params.time} ثانیه`,
+          `نسبت قهوه به آب: ${params.ratio}`,
+          `آسیاب: ${params.grind || 'متوسط'}` // Use grind from params, or default
+        ];
+        instructions.forEach(instruction => {
+          const li = document.createElement('li');
+          li.textContent = instruction;
+          instructionsList.appendChild(li);
+        });
+      } else {
+        const li = document.createElement('li');
+        li.textContent = 'دستورالعمل دم‌آوری برای این ترکیب/روش یافت نشد.';
+        instructionsList.appendChild(li);
+      }
+      
+      // Show result panel
+      resultPanel.classList.add('show');
+    }
+});
   </script>
 </body>
-</html>
+  </html>
